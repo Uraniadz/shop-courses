@@ -1,0 +1,25 @@
+const multer = require('multer');
+const path = require('node:path');
+
+const storage = multer.diskStorage({
+  destination(req, file, cb) {
+    cb(null, 'images');
+  },
+  filename(req, file, cb) {
+    cb(null, new Date().toISOString() + '-' + file.originalname);
+  },
+}); // куди зберігати файли і як на сервер
+
+const allowedTypes = ['image/png', 'image/jpg', 'image/jpeg'];
+const fileFilter = (req, file, cb) => {
+  if (allowedTypes.includes(file.mimetype)) {
+    cb(null, true);
+  } else {
+    cb(null, false);
+  }
+};
+
+module.exports = multer({
+  storage: storage,
+  fileFilter,
+});

@@ -1,0 +1,21 @@
+<div class='row'>
+
+  {{! відновлення паролю  }}
+  <div class='col s6 offset-s3'>
+    {{#if error}}
+      <p class='alert'>{{error}}</p>
+    {{/if}}
+    <h1>Забули пароль?</h1>
+    <form action='/auth/reset' method='post'>
+      <div class='input-field'>
+        <input id='email' name='email' type='email' class='validate' required />
+        <label for='email'>Email</label>
+        <span class='helper-text' data-error='напишіть email'></span>
+      </div>
+
+      <input type='hidden' name='_csrf' value='{{csrf}}' />
+      <button type='submit' class='btn btn-primary'>Скинути</button>
+    </form>
+  </div>
+
+</div>
